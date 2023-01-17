@@ -1,0 +1,22 @@
+{
+  "name": "calculador-salario-familiar",
+  "version": "1.0.0",
+  "description": "Calculador en base al salario anual familiar",
+  "main": "main.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alexis2428/Calculador-salario-familiar.git"
+  },
+  "author": "Alexis Landa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alexis2428/Calculador-salario-familiar/issues"
+  },
+  "homepage": "https://github.com/Alexis2428/Calculador-salario-familiar#readme",
+  "dependencies": {
+    "bootstrap": "^5.2.3"
+  }
+}
