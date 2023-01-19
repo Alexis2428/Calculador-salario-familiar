@@ -9,10 +9,32 @@
     <title>Calculador salario familiar</title>
 </head>
 <body>
+    <form class="container">
         <div class="alert alert-info text-center" role="alert">
             <h4 class="alert-heading">Calculador salario familiar</h4>
             <p class="mb-0">Presione "agregar" o "quitar" para agregar o quitar integrantes e ingresar el salario anual.</p>
         </div>
+
+        <div id="integrantes"></div>
+
+        <button name="agregar" type="button" class="btn btn-outline-primary">Agregar</button>
+        <button name="quitar" type="button" class="btn btn-outline-danger">Quitar</button>
+
+        <ul id="errores" class="list-group list-group-flush"></ul>
+
+        <button name="calcular" type="submit" class="oculto btn btn-outline-primary">Calcular</button>
+
+        <div id="respuestas" class="oculto">
+            <p>El mayor salario anual es ... <strong id="salario-mayor"></strong></p>
+            <p>El menor salario anual es ... <strong id="salario-menor"></strong></p>
+            <p>El salario anual promedio es ... <strong id="salario-promedio"></strong></p>
+            <p>El salario mensual promedio es ... <strong id="salario-mensual-promedio"></strong></p>
+        </div>
+
+        <button type="reset" name="reiniciar" class="oculto">Reiniciar</button>
+
+    </form>
+
     <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>
