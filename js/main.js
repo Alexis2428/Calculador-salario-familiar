@@ -1,3 +1,18 @@
+const $botonAgregar = document.querySelector('button[name=agregar]');
+$botonAgregar.onclick = function() {
+    agregarIntegrante();
+    mostrarBotonCalcular();
+}
+
+const $botonQuitar = document.querySelector('button[name=quitar]');
+$botonQuitar.onclick = borrarUltimoIntegrante;
+
+const $botonCalcular = document.querySelector('button[name=calcular]');
+$botonCalcular.onclick = obtenerRespuestas;
+
+const $botonReiniciar = document.querySelector('button[name=reiniciar]');
+$botonReiniciar.onclick = reiniciar;
+
 function agregarIntegrante() {
     const $cuadroTexto = document.createElement('input');
     $cuadroTexto.type = 'number';
@@ -32,6 +47,33 @@ function borrarIntegrantes() {
     }
 }
 
+function obtenerRespuestas(event) {
+    event.preventDefault();
+
+    if (validarSalarios()) {
+        const salarios = obtenerSalarios();
+
+        obtenerRespuesta('mayor', obtenerNumeroMayor(salarios));
+        obtenerRespuesta('menor', obtenerNumeroMenor(salarios));
+        obtenerRespuesta('promedio', obtenerPromedio(salarios).toFixed(2));
+        obtenerRespuesta('mensual-promedio', (obtenerPromedio(salarios) / 12).toFixed(2));
+
+        mostrarRespuestas();
+        mostrarBotonReiniciar();
+    }
+}
+
+function obtenerSalarios() {
+    const salarios = [];
+    const $salarios = document.querySelectorAll('.integrante input');
+
+    for (let i = 0; i < $salarios.length; i++) {
+        salarios.push(Number($salarios[i].value));
+    }
+
+    return salarios;
+}
+
 function mostrarBotonCalcular() {
     document.querySelector('button[name=calcular]').classList.remove('oculto');
 }
@@ -48,11 +90,22 @@ function ocultarBotonReiniciar() {
     document.querySelector('button[name=reiniciar').classList.add('oculto');
 }
 
+function obtenerRespuesta(tipo, valor) {
+    document.querySelector(`#salario-${tipo}`).textContent = valor;
+}
+
 function mostrarRespuestas() {
     document.querySelector('#respuestas').className = '';
 }
 
 function ocultarRespuestas() {
     document.querySelector('#respuestas').className = 'oculto';
+}
+
+function reiniciar() {
+    borrarIntegrantes();
+    ocultarBotonCalcular();
+    ocultarRespuestas();
+    ocultarBotonReiniciar();
 }
 
