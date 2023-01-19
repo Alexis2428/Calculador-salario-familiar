@@ -109,3 +109,90 @@ function reiniciar() {
     ocultarBotonReiniciar();
 }
 
+function validarSalarios() {
+    const errores = {};
+    const $salarios = document.querySelectorAll('.integrante input');
+
+    for (let i = 0; i < $salarios.length; i++) {
+        errores[i] = validarSalario($salarios[i].value);
+    }
+
+    const sonValidos = 0 === manejarErrores(errores, $salarios);
+
+    return sonValidos;
+}
+
+function validarSalario(salario) {
+    if ('' === salario) {
+        return 'El campo salario no debe estar vacio';
+    }
+
+    if (!/^[0-9]+[\.,]*[0-9]{0,2}$/.test(salario)) {
+        return 'El campo salario solo admite hasta 2 decimales';
+    }
+
+    return '';
+}
+
+function manejarErrores(errores, $salarios) {
+    let cantidadErrores = 0;
+
+    Object.keys(errores).forEach(function(key) {
+        const error = errores[key];
+
+        if (error) {
+            cantidadErrores++;
+            $salarios[key].classList.add('error');
+
+            if (!comprobarExisteError(error)) {
+                crearError(error);
+            }
+        } else {
+            $salarios[key].classList.remove('error');
+        }
+    })
+
+    const $listaErrores = document.querySelectorAll('#errores li');
+    borrarErroresCorregidos(errores, $listaErrores);
+
+    return cantidadErrores;
+}
+
+function crearError(error) {
+    const $error = document.createElement('li');
+    $error.className = 'list-group-item';
+    $error.innerText = error;
+
+    document.querySelector('#errores').appendChild($error);
+}
+
+function comprobarExisteError(error) {
+    const $listaErrores = document.querySelectorAll('#errores li');
+
+    for (let i = 0; i < $listaErrores.length; i++) {
+        if (error === $listaErrores[i].innerText) {
+            return true;
+        }
+    }
+
+    return false
+}
+
+function borrarErroresCorregidos(errores, $listaErrores) {
+    const valorErrores = Object.values(errores);
+
+    for (let i = 0; i < $listaErrores.length; i++) {
+        let existeError = false;
+
+        for (let j = 0; j < valorErrores.length; j++) {
+            if ($listaErrores[i].innerText === valorErrores[j]) {
+                existeError = true;
+                break;
+            }
+        }
+
+        if (!existeError) {
+            $listaErrores[i].remove();
+        }
+    }
+}
