@@ -51,7 +51,7 @@ function borrarIntegrantes() {
 function obtenerRespuestas(event) {
     event.preventDefault();
 
-    if (validarSalarios()) {
+    if (validarSalarios() && !(undefined === document.querySelectorAll('.integrante input')[0])) {
         const salarios = obtenerSalarios();
 
         obtenerRespuesta('mayor', obtenerNumeroMayor(salarios));
@@ -61,6 +61,9 @@ function obtenerRespuestas(event) {
 
         mostrarRespuestas();
         mostrarBotonReiniciar();
+
+    } else {
+        ocultarRespuestas();
     }
 }
 
