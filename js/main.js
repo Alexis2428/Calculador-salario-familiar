@@ -17,6 +17,7 @@ function agregarIntegrante() {
     const $cuadroTexto = document.createElement('input');
     $cuadroTexto.type = 'number';
     $cuadroTexto.className = 'form-control';
+    $cuadroTexto.setAttribute('placeholder', 'salario');
 
     const $texto = document.createElement('label');
     $texto.textContent = 'Ingrese el salario anual';
