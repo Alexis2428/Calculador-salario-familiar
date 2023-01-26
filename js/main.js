@@ -104,6 +104,7 @@ function ocultarRespuestas() {
 
 function reiniciar() {
     borrarIntegrantes();
+    borrarErroresAnteriores();
     ocultarBotonCalcular();
     ocultarRespuestas();
     ocultarBotonReiniciar();
@@ -194,5 +195,13 @@ function borrarErroresCorregidos(errores, $listaErrores) {
         if (!existeError) {
             $listaErrores[i].remove();
         }
+    }
+}
+
+function borrarErroresAnteriores() {
+    const $errores = document.querySelectorAll('#errores li');
+
+    for (let i = 0; i < $errores.length; i++) {
+        $errores[i].remove();
     }
 }
